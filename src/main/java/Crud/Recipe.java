@@ -132,17 +132,13 @@ public class Recipe {
             }
         }
         System.out.println(map);
-         
-         String email = map.get("email");
-        String author = map.get("author");
-        String category = map.get("category");
-        String recipeName = map.get("recipeName");
+        String idRe = map.get("id");
         String ingredient = map.get("ingredient");
         String step = map.get("step");
         String dateCreated = map.get("dateCreated");
         
-        doUpdate("update newrecipeentry set email = ?, author = ?, category = ?, recipeName = ? , ingredient = ? , step = ?, dateCreated = ? where id = ?",
-                email, author, category, recipeName, ingredient, step, dateCreated, id);
+        doUpdate("update newrecipeentry set id=?, ingredient = ? , step = ?, dateCreated = ? where id = ?",
+               idRe,ingredient, step, dateCreated, id);
     }
 
     /**
