@@ -32,9 +32,9 @@
             body {
                 margin-top: 75px;
                  background-image: url("images/main1.jpg"); 
-                 color: red;
+                
                  font-weight: bold;
-                 font-size: 150%
+                 font-size: 160%
             }
 
 
@@ -66,12 +66,6 @@
                 padding: 2em;
                 clear: both;
                 color: #808080;
-                    }
-                    #addRecipeButton{
-                        background-color: red;
-                    }     
-                    #cancel {
-                        background-color: red;
                     }
                    
                     
@@ -191,14 +185,14 @@
                     <div class="form-group">
                         <label for="ingredients" class="col-md-2">Ingredients</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" id="ingredients" placeholder="Ingredients"></textarea><br>
+                            <textarea class="form-control" id="ingredients" placeholder="Ingredients, Use numbers to differentiate different ingredients"></textarea><br>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="steps" class="col-md-2">Steps</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" id="steps" placeholder="Steps"></textarea><br>
+                            <textarea class="form-control" id="steps" placeholder="Steps, Use numbers to differentiate different steps"></textarea><br>
                         </div>
                     </div>
 
@@ -211,7 +205,7 @@
 
                     <div class="form-group">
                         <div class="col-md-12 text-right">
-                            <button type="reset" class="btn btn-lg btn-primary"  style="background-color:lightgreen" id="cancel">Cancel</button>
+                            <button type="reset" class="btn btn-lg btn-primary"   id="cancel">Cancel</button>
                             <input type="button" class="btn btn-lg btn-primary" id="addRecipeButton" value="Post">
                             
                         </div>
