@@ -7,22 +7,25 @@
         <meta name="description" content="Beryl Recipe Blog">
         <meta name="author" content="Beryl Nene">
 
-
+        <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-        <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-
+       
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>     
+       
 
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
+        
+        
+         
+        <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>     
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  
         <title>Beryl's Recipe Blog</title>
 
         <style>
@@ -265,7 +268,7 @@
         </style>
         <script>
             $(document).ready(function() {
-
+                     var id = $(this).attr('id');
                 $.ajax({
                     type: "GET",
                     url: "rs/recipe",
@@ -281,29 +284,29 @@
                                     + "<td>" + item.ingredient + "</td>"
                                     + "<td>" + item.step + "</td>"
                                     + "<td>" + item.dateCreated + "</td>"
-                                    + "<td><b><font color='black'><input type='button'  value='Delete This Recipe' id=" + item.id + "class='delete'></input>"
-                                    + "<td><b><font color='black'><input type='button'  value='Update This Recipe' id=" +item.id+" class='update'></input></tr>");
+                                    + "<td><input type='button'  value='Delete This Recipe' id=" +item.id+" class='delte'></input></td></input></td>"
+                                    + "<td><input type='button'  value='Update This Recipe' id=" +item.id+" class='update'></input></td></tr>");
                         });
                     }
 
                 });
-                $('#tableRecipe').on('click', '.delete', function() {
-
+                 
+$('#tableRecipe').on('click', '.delte', function() {            
                     var id = $(this).attr('id');
-                    alert(id);
-                    $.ajax({
-                        type: "delete",
-                        url: "rs/recipe/" + id + '',
-                        contentType: "application/json",
-                        dataType: "json",
-                        success: function(data) {
-
-                            location.href = "http://localhost:8080/recipeblog/index.html";
-
-                        }
-
-                    });
-                });
+                     alert(id);
+                     $.ajax({
+                         type: "delete",
+                         url: "rs/recipe/" + id + '',
+                         contentType: "application/json",
+                         dataType: "json",
+                         success: function(data) {
+ 
+                             location.href = "http://localhost:8080/recipeblog/index.html";
+ 
+                         }
+ 
+                     });
+                 });
 
                 $('#tableRecipe').on('click', '.update', function() {
                     alert("update");

@@ -105,6 +105,7 @@ public class Recipe {
      * doPut Method takes a string parameter and passes 
      * which then pass values into the newrecipeentry table
      * to put on the table
+     * USer can only put the id, ingredients, steps and date updated
      * @param id
      * @param input
      */

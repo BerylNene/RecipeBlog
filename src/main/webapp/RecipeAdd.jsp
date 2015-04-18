@@ -148,7 +148,6 @@
                     <div class="form-group">
                         <label for="category" class="col-md-2">Category</label>
                         <div class="col-md-10">
-                           <!-- <input type="text" class="form-control" id="category" placeholder="Category"> -->
                            <select class="form-control" id="category" placeholder="Category">
                                
                                <option> UnKnown Category </option>
@@ -185,14 +184,14 @@
                     <div class="form-group">
                         <label for="ingredients" class="col-md-2">Ingredients</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" id="ingredients" placeholder="Ingredients, Use numbers to differentiate different ingredients"></textarea><br>
+                            <textarea class="form-control" id="ingredients" placeholder="Ingredients, Use numbers and commas to differentiate different ingredients"></textarea><br>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="steps" class="col-md-2">Steps</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" id="steps" placeholder="Steps, Use numbers to differentiate different steps"></textarea><br>
+                            <textarea class="form-control" id="steps" placeholder="Steps, Use numbers and commas to differentiate different steps"></textarea><br>
                         </div>
                     </div>
 
