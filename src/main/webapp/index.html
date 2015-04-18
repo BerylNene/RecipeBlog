@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="Beryl Recipe Blog">
         <meta name="author" content="Beryl Nene">
@@ -18,20 +19,13 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>     
 
-
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
         <title>Beryl's Recipe Blog</title>
 
         <style>
-
-            /*!
-             * Bootstrap v3.0.0
-             *
-             * Copyright 2013 Twitter, Inc
-             * Licensed under the Apache License v2.0
-             * http://www.apache.org/licenses/LICENSE-2.0
-             *
-             * Designed and built with all the love in the world @twitter by @mdo and @fat.
-             */
 
             .logo {
                 background-size: cover;
@@ -219,35 +213,54 @@
                 overflow: auto;
                 font-family: Menlo,Monaco,"Liberation Mono",Consolas,monospace !important;
             }
-            
+
             #tableRecipe{
                 background-color:#000000;
-                 //background-color:#FFFFC2;
-                 opacity: .8;
-                 color:#ffffff;
-                 font: 80%;
-            }
+                //background-color:#FFFFC2;
+                opacity: .8;
+                color:#ffffff;
+                font: 80%;;
+                
+}
+            
 
             table th{
-               text-align: center;
-            }
-            table td {
+                text-align: center;
                 padding:4px;
                 width: 100px;
             }
-             footer {
+            td{
+                padding-left: 0.5em;
+                padding-right: 0.5em;
+            }
+
+            footer {
                 font-size: 80%;
                 text-align: center;
                 background-color: #191919;
-               border: 2px solid;
+                border: 2px solid;
                 padding: 2em;
                 color: #808080;
-                    }
-                    
+            }
+
             #button {
                 color:red;        
-                    }
-            
+            }
+            #dialog{
+                display: none;
+                  background-image: url("images/background3.jpg"); 
+                  padding-left:2em; 
+                  margin-top: 3em;
+            }
+            label, input { display:block; }
+            input.text { margin-bottom:12px; width:95%; padding: .4em; }
+            fieldset { padding:0; border:0; margin-top:25px; }
+            h1 { font-size: 1.2em; margin: .6em 0; }
+            div#users-contain { width: 350px; margin: 20px 0; }
+            div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+            div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+            .ui-dialog .ui-state-error { padding: .3em; }
+            .validateTips { border: 1px solid transparent; padding: 0.3em; }
 
         </style>
         <script>
@@ -268,14 +281,14 @@
                                     + "<td>" + item.ingredient + "</td>"
                                     + "<td>" + item.step + "</td>"
                                     + "<td>" + item.dateCreated + "</td>"
-                                    + "<td><input type='button' id='button' value='Delete This Recipe' id=" + item.id + " class='delete'></input>"
-                                    + "<td><input type='button'  id='button' value='Update This Recipe' id=" + item.id + " class='update'></input></tr>");
+                                    + "<td><b><font color='black'><input type='button'  value='Delete This Recipe' id=" + item.id + "class='delete'></input>"
+                                    + "<td><b><font color='black'><input type='button'  value='Update This Recipe' id=" +item.id+" class='update'></input></tr>");
                         });
                     }
 
                 });
                 $('#tableRecipe').on('click', '.delete', function() {
-                   
+
                     var id = $(this).attr('id');
                     alert(id);
                     $.ajax({
@@ -292,19 +305,58 @@
                     });
                 });
 
-                $('#tableRecipe').on('click', 'update.html', function() {
-                   
+                $('#tableRecipe').on('click', '.update', function() {
+                    alert("update");
                     var id = $(this).attr('id');
                     alert(id);
+                    $("#dialog").dialog({
+                        autoOpen: true,
+                        height: 750,
+                        width: 600,
+                        model: true,
+                        show: 'slide',
+                        open: function() {
+                            $.ajax({
+                                type: "GET",
+                                url: "rs/recipe/"+id,
+                                contentType: "application/json",
+                                dataType: "json",
+                                success: function(data) {
+                                    alert(data);
+                                    $.each(data, function(index, item){
+                                          $('#id').val(item.id);
+                                        $('#ingredient').val(item.ingredient);
+                                        $('#step').val(item.step);
+                                        $('#dateCreated').val(item.dateCreated);
+                                        
+                                    });
+                                   
+                                }
+
+                            });
+                        }
+                    });
+
+                });
+                
+                 $('#dialog').on('click', '#updateButton', function() {
+                    var id = $("#id").val();
+                   alert("id for update :" +id);
                     $.ajax({
-                        type: "put",
-                        url: "rs/recipe/" + id + '',
+                        type: "PUT",
+                        url: 'rs/recipe/'+id,
                         contentType: "application/json",
                         dataType: "json",
+                        data: JSON.stringify({
+                                 "id" : $('#id').val(),
+                               "ingredient" : $('#ingredient').val(),
+                               "step" : $('#step').val(),
+                               "dateCreated" : $('#dateCreated').val()
+                                   }),
                         success: function(data) {
-
+                            alert('update complete');
                             location.href = "http://localhost:8080/recipeblog/index.html";
-                            // window.open( $form.attr('action') + '?' + $form.serialize(), 'PopUp', 'width=100,height=100' );
+
                         }
 
                     });
@@ -313,6 +365,7 @@
 
 
             });
+
 
 
         </script>
@@ -333,7 +386,7 @@
                 <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
-                            
+
                     </form>
                     <ul class="nav navbar-nav">
                         <li  class="active"><a href="index.html">Home</a></li>
@@ -350,31 +403,47 @@
                 <h1>Beryl</h1>
             </hgroup>
 
-            <section>
-                <div id="listRecipe">
-                    <table border="3" width="1200px" id="tableRecipe">
-                        <th>EMAIL</th>
-                        <th>AUTHOR</th>
-                        <th>CATEGORY</th>
-                        <th>RECIPE NAME</th>
-                        <th>INGREDIENTS</th>
-                        <th>STEPS</th>
-                        <th>DATE CREATED</th>
-                        <th>DELETE</th>
-                        <th>UPDATE</th>
+
+            <div id="listRecipe">
+                <table border="4" width="1350px" id="tableRecipe">
+                    <th>EMAIL</th>
+                    <th>AUTHOR</th>
+                    <th>CATEGORY</th>
+                    <th>RECIPE NAME</th>
+                    <th>INGREDIENTS</th>
+                    <th>STEPS</th>
+                    <th>DATE CREATED</th>
+                    <th>DELETE</th>
+                    <th>UPDATE</th>
 
 
-                    </table>
-                </div>
+                </table>
+            </div>
 
-            </section>
+
 
         </section>
-        
-       <footer data-role="footer">
-        	<h4>All Rights Reserved</h4>
-			<h4>&copy Beryl Bawo Nene 2015 </h4>
-    	</footer>
+
+        <div id="dialog">
+            <fieldset>
+                <label for="id">ID</label>
+                <input type="text" name="id" id="id">
+                <label for="Ingredients">Ingredients</label>
+                
+                <textarea id="ingredient"></textarea>
+                <label for="Steps">Steps</label>
+                <input type="text" name="Steps" id="step" >
+                <label for="dateCreated">Date Updated</label>
+                <input type="date" name="dateCreated" id="dateCreated">
+
+                <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                <input type="button" value="Update" id="updateButton">
+            </fieldset>
+        </div>
+        <footer data-role="footer">
+            <h4>All Rights Reserved</h4>
+            <h4>&copy Beryl Bawo Nene 2015 </h4>
+        </footer>
 
     </body>
 </html>
