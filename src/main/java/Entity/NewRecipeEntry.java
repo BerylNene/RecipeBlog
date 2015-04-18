@@ -1,12 +1,10 @@
 package Entity;
 
 
+import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.PrePersist;
+
 
 
 
@@ -22,29 +20,39 @@ import javax.persistence.PrePersist;
  *
  * @author c0641046
  */
-@Entity
-public class NewRecipeEntry {
+
+public class NewRecipeEntry implements Serializable {
     
-    @Id
-    @GeneratedValue
+
     private int id;
     private String email;
     private String author;
     private String category;
     private String recipeName;
     
-   @Lob
-    private String ingredient;
-   private String step;
+ 
+    private String ingredients;
+    private String steps;
    
    
    private Date dateCreated;
    
+    public NewRecipeEntry(int id, String email, String author, String category, String recipeName, String ingredients, String steps, Date dateCreated) {
+        this.id = id;
+        this.email = email;
+        this.author = author;
+        this.category = category;
+        this.recipeName = recipeName;
+        this.ingredients = ingredients;
+        this.steps = steps;
+        this.dateCreated = dateCreated;
+    }
+
+    public NewRecipeEntry() {
+    }
    
-   @PrePersist
-   private void onCreate() {
-       dateCreated = new Date();
-   }
+   
+   
 
    /**
     * 
@@ -121,17 +129,17 @@ public class NewRecipeEntry {
      * 
      * @return ingredient
      */
-    public String getIngredient() {
-        return ingredient;
+    public String getIngredients() {
+        return ingredients;
     }
 
     
     /**
      * 
-     * @param ingredient 
+     * @param ingredients 
      */
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
     }
 
     
@@ -139,17 +147,17 @@ public class NewRecipeEntry {
      * 
      * @return step
      */
-    public String getStep() {
-        return step;
+    public String getSteps() {
+        return steps;
     }
 
     
     /**
      * 
-     * @param step 
+     * @param steps
      */
-    public void setStep(String step) {
-        this.step = step;
+    public void setSteps(String steps) {
+        this.steps = steps;
     }
 
     
