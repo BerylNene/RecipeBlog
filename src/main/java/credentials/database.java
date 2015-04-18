@@ -9,15 +9,13 @@ package credentials;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author c0641046
  */
 public class database {
-      private Connection getConnection() {
+      /*private Connection getConnection() {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -29,6 +27,23 @@ public class database {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
            // Logger.getLogger(Blog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conn;
+    }*/
+      
+      public static Connection getConnection() {
+        Connection conn = null;
+        try {
+            
+            Class.forName("com.mysql.jdbc.Driver");
+            String jdbc = "jdbc:mysql://localhost/recipeblog";
+            String user = "root";
+            String pass = "";
+            conn = DriverManager.getConnection(jdbc, user, pass);
+            
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.err.println("No class found Exception" + ex.getMessage());
         }
         return conn;
     }

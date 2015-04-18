@@ -29,14 +29,22 @@ public class NewRecipeEntry implements Serializable {
     private String author;
     private String category;
     private String recipeName;
-    
- 
     private String ingredients;
     private String steps;
-   
-   
    private Date dateCreated;
    
+   
+   /**
+    * 
+    * @param id
+    * @param email
+    * @param author
+    * @param category
+    * @param recipeName
+    * @param ingredients
+    * @param steps
+    * @param dateCreated 
+    */
     public NewRecipeEntry(int id, String email, String author, String category, String recipeName, String ingredients, String steps, Date dateCreated) {
         this.id = id;
         this.email = email;
@@ -48,10 +56,11 @@ public class NewRecipeEntry implements Serializable {
         this.dateCreated = dateCreated;
     }
 
+    /**
+     * Empty construction for NewRecipeEntry
+     */
     public NewRecipeEntry() {
     }
-   
-   
    
 
    /**
